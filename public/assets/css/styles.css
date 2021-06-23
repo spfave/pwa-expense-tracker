@@ -3,6 +3,11 @@ body {
   font-family: Arial;
 }
 
+.my {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 button,
 input {
   font-size: 100%;
