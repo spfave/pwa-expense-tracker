@@ -1,28 +1,37 @@
+// Server and middleware modules/packages
 const express = require('express');
-const logger = require('morgan');
+const path = require('path');
+
+// Database, Routes
 const mongoose = require('mongoose');
 const compression = require('compression');
+const logger = require('morgan');
 
-const PORT = 3001;
-
+// Server setup
+const PORT = process.env.PORT || 3001;
 const app = express();
 
-app.use(logger('dev'));
+// Set public folder path
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(compression());
+// Middleware - data parsing, compression,  logger
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(compression());
+app.use(logger('dev'));
 
-app.use(express.static('public'));
-
-mongoose.connect('mongodb://localhost/expenseDB', {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-});
-
-// routes
+// Routes
 app.use(require('./routes/api.js'));
 
-app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}!`);
-});
+// Database connection
+mongoose
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/expenseDB', {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => console.log('MongoDB connected'));
+
+// Start server
+app.listen(PORT, () => console.log(`App running on port ${PORT}!`));
