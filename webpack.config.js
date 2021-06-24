@@ -7,8 +7,8 @@ const config = {
     index: '/public/assets/js/index.js',
   },
   output: {
-    path: path.join(__dirname, 'public', 'dist', 'assets', 'js'),
-    filename: '[name].bundle.js',
+    path: path.join(__dirname, 'public', 'dist'),
+    filename: path.join('assets', 'js', '[name].bundle.js'),
   },
   plugins: [
     new WebpackPwaManifest({
