@@ -7,7 +7,7 @@ const config = {
     index: '/public/assets/js/index.js',
   },
   output: {
-    path: __dirname + '/public/dist',
+    path: path.join(__dirname, 'public', 'dist', 'assets', 'js'),
     filename: '[name].bundle.js',
   },
   plugins: [
