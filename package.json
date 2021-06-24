@@ -5,10 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "prestart": "npm run webpack",
+    "prestart": "webpack",
     "lite-server": "lite-server",
-    "webpack": "webpack --watch",
-    "build": "npm run webpack"
+    "build": "webpack",
+    "webpack": "webpack --watch"
   },
   "repository": {
     "type": "git",
