@@ -15,7 +15,7 @@ const config = {
       filename: 'manifest.json',
       inject: false,
       fingerprints: false,
-      publicPath: '/',
+      publicPath: './',
 
       name: 'Expense Tracker',
       short_name: 'Expenses',
