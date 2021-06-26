@@ -88,9 +88,8 @@ function sendTransaction(isAdding) {
   // validate form
   if (nameEl.value === '' || amountEl.value === '') {
     errorEl.textContent = 'Missing Information';
+    setTimeout(() => (errorEl.textContent = ''), 2000);
     return;
-  } else {
-    errorEl.textContent = '';
   }
 
   // create record
