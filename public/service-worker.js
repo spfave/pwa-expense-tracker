@@ -6,6 +6,7 @@ const FILES_TO_CACHE = [
   '/assets/css/styles.css',
 
   'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
+  'https://cdn.jsdelivr.net/npm/chart.js@2.8.0',
 
   // cache webpack generated manifest, js bundles, and assets
   '/dist/manifest.json',
@@ -62,6 +63,24 @@ self.addEventListener('activate', (event) => {
 // Fetch
 self.addEventListener('fetch', (event) => {
   // Submit api requests to server, fallback to cache if unavailable
+  if (/\/api\//.test(event.request.url)) {
+    event.respondWith(
+      caches
+        .open(RUNTIME_CACHE)
+        .then((cache) => {
+          return fetch(event.request)
+            .then((response) => {
+              if (response.status === 200) {
+                cache.put(event.request, response.clone());
+              }
+              return response;
+            })
+            .catch((error) => cache.match(event.request));
+        })
+        .catch((error) => console.log(error))
+    );
+    return;
+  }
 
   // Submit non-api requests to the cache: Cache falling back to network approach
   event.respondWith(
