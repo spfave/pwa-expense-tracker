@@ -11,6 +11,7 @@ const FILES_TO_CACHE = [
   '/dist/manifest.json',
 
   '/dist/assets/js/index.bundle.js',
+  '/dist/assets/js/loadSW.bundle.js',
 
   '/dist/assets/icons/icon_72x72.png',
   '/dist/assets/icons/icon_96x96.png',
@@ -59,3 +60,13 @@ self.addEventListener('activate', (event) => {
 });
 
 // Fetch
+self.addEventListener('fetch', (event) => {
+  // Submit api requests to server, fallback to cache if unavailable
+
+  // Submit non-api requests to the cache: Cache falling back to network approach
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
+});
