@@ -1,16 +1,14 @@
 import { populateTotal, populateTable, populateChart } from './displayMethods';
 
-export default function getTransactions(transactions) {
-  return fetch('/api/transaction')
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      // save db data on global variable
-      transactions = data;
+export default async function getTransactions(transactions) {
+  try {
+    const response = await fetch('/api/transaction');
+    transactions = await response.json();
 
-      populateTotal(transactions);
-      populateTable(transactions);
-      populateChart(transactions);
-    });
+    populateTotal(transactions);
+    populateTable(transactions);
+    populateChart(transactions);
+  } catch (error) {
+    console.log(error);
+  }
 }
