@@ -5,6 +5,7 @@ const config = {
   mode: 'development',
   entry: {
     index: '/public/assets/js/index.js',
+    loadSW: '/public/assets/js/load-service-worker.js',
   },
   output: {
     path: path.join(__dirname, 'public', 'dist'),
