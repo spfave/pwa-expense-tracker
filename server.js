@@ -21,7 +21,7 @@ app.use(compression());
 app.use(logger('dev'));
 
 // Routes
-app.use(require('./routes/api.js'));
+app.use(require('./routes/api-transactions.js'));
 
 // Database connection
 mongoose
