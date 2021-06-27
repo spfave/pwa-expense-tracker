@@ -77,4 +77,6 @@ document.querySelector('#sub-btn').onclick = function () {
 };
 
 // Page Execution
-getTransactions(transactions);
+getTransactions(transactions)
+  .then((response) => (transactions = response))
+  .catch((error) => console.log(error));

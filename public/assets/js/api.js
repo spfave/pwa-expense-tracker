@@ -8,6 +8,8 @@ export default async function getTransactions(transactions) {
     populateTotal(transactions);
     populateTable(transactions);
     populateChart(transactions);
+
+    return transactions;
   } catch (error) {
     console.log(error);
   }
