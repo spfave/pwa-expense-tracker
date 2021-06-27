@@ -1,3 +1,4 @@
+// Functions
 function loadServiceWorker() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
@@ -14,4 +15,5 @@ function loadServiceWorker() {
   }
 }
 
+// Page Execution
 loadServiceWorker();
