@@ -4,9 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "prestart": "webpack",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "npm run build && node server.js",
+    "start:dev": "concurrently \"npm run server\" \"npm run webpack\"",
     "lite-server": "lite-server",
+    "server": "nodemon server.js --ignore public",
     "build": "webpack",
     "webpack": "webpack --watch"
   },
@@ -23,15 +25,18 @@
   "dependencies": {
     "compression": "^1.7.4",
     "express": "^4.17.1",
+    "if-env": "^1.0.4",
     "lite-server": "^2.5.3",
     "mongoose": "^5.5.15",
     "morgan": "^1.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
+    "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/preset-env": "^7.14.7",
     "babel-loader": "^8.2.2",
     "babel-plugin-dynamic-import-webpack": "^1.1.0",
+    "concurrently": "^6.2.0",
     "webpack": "^5.40.0",
     "webpack-cli": "^4.7.2",
     "webpack-pwa-manifest": "^4.3.0"
