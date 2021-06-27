@@ -1,34 +1,77 @@
-let db;
-let expenseVersion;
-
 // Variables and Functions
-const request = indexedDB.open('ExpenseDB', expenseVersion || 1);
+const indexedDBName = 'ExpenseDB';
+const storeName = 'ExpenseStore';
+const dbVersion = 1;
+let db;
 
-request.onupgradeneeded = function (event) {
-  const { oldVersion } = event;
-  const newVersion = event.newVersion || db.version;
+function setupIndexedDB() {
+  const request = indexedDB.open(indexedDBName, dbVersion);
 
-  console.log(
-    `Upgraded needed in IndexDB\nDB updated from version ${oldVersion} to ${newVersion}`
-  );
+  request.onupgradeneeded = function (event) {
+    db = event.target.result;
+    db.createObjectStore(storeName, { autoIncrement: true });
 
-  db = event.target.result;
-  if (!db.objectStoreNames.length) {
-    db.createObjectStore('ExpenseStore', { autoIncrement: true });
-  }
-};
+    console.log('indexedDB upgraded');
+  };
 
-request.onerror = function (event) {
-  console.log(`Error: ${event.target.errorCode}`);
-};
+  request.onsuccess = function (event) {
+    db = event.target.result;
+    console.log('connected to indexedDB');
+  };
 
-function saveRecord(record) {
-  console.log('Expense saved locally');
-
-  const transaction = db.transaction(['ExpenseStore'], 'readwrite');
-  const store = transaction.objectStore('ExpenseStore');
-  store.add(record);
+  request.onerror = function (event) {
+    console.log(`Error: ${event.target.errorCode}`);
+  };
 }
+
+// function saveRecord(record) {
+//   // Create transaction on ExpenseStore DB, access ExpenseStore, and add to store
+//   const transaction = db.transaction(storeName, 'readwrite');
+//   const store = transaction.objectStore(storeName);
+//   store.add(record);
+
+//   console.log('Expense saved locally');
+// }
+
+// function checkDatabase() {
+//   const storeName = 'ExpenseStore';
+
+//   // Open transaction on ExpenseStore DB, access ExpenseStore, get all records
+//   const transaction = db.transaction(storeName, 'readwrite');
+//   const store = transaction.objectStore(storeName);
+//   const allExpenses = store.getAll();
+
+//   // If request for all expenses successful, bulk add them to to expenseDB
+//   allExpenses.onsuccess = async () => {
+//     try {
+//       // if no expenses in store: exit function
+//       if (!allExpenses.result.length) return;
+
+//       const response = await fetch('/api/transaction/bulk', {
+//         method: 'POST',
+//         body: JSON.stringify(allExpenses.result),
+//         headers: {
+//           Accept: 'application/json, text/plain, */*',
+//           'Content-Type': 'application/json',
+//         },
+//       });
+//       const data = await response.json();
+
+//       // if no  data returned: exit function
+//       if (!data.length) return;
+
+//       // Open transaction on ExpenseStore DB, access ExpenseStore, clear store
+//       const transaction = db.transaction(storeName, 'readwrite');
+//       const store = transaction.objectStore(storeName);
+//       store.clear();
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// }
 
 // Event Listeners
 // window.addEventListener('online', checkDatabase);
+
+// Page Execution
+setupIndexedDB();
