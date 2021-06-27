@@ -8,10 +8,9 @@ request.onupgradeneeded = (event) => {
   const { oldVersion } = event;
   const newVersion = event.newVersion || db.version;
 
-  console.log(`
-    Upgraded needed in IndexDB
-    DB  updated from version ${oldVersion} to ${newVersion}
-  `);
+  console.log(
+    `Upgraded needed in IndexDB\nDB updated from version ${oldVersion} to ${newVersion}`
+  );
 
   db = event.target.result;
   if (!db.objectStoreNames.length) {
