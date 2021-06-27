@@ -19,14 +19,9 @@ function sendTransaction(isAdding) {
   // create record
   let transaction = {
     name: nameEl.value,
-    value: amountEl.value,
+    value: isAdding ? amountEl.value : -amountEl.value,
     date: new Date().toISOString(),
   };
-
-  // if subtracting funds, convert amount to negative number
-  if (!isAdding) {
-    transaction.value *= -1;
-  }
 
   // add to beginning of current array of data
   transactions.unshift(transaction);
