@@ -24,14 +24,14 @@ function setupIndexedDB() {
   };
 }
 
-// function saveRecord(record) {
-//   // Create transaction on ExpenseStore DB, access ExpenseStore, and add to store
-//   const transaction = db.transaction(storeName, 'readwrite');
-//   const store = transaction.objectStore(storeName);
-//   store.add(record);
+function saveRecord(record) {
+  // Create transaction on ExpenseStore DB, access ExpenseStore, and add to store
+  const transaction = db.transaction(storeName, 'readwrite');
+  const store = transaction.objectStore(storeName);
+  store.add(record);
 
-//   console.log('Expense saved locally');
-// }
+  console.log('Expense saved locally');
+}
 
 // function checkDatabase() {
 //   const storeName = 'ExpenseStore';
