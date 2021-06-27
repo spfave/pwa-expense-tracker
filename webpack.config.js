@@ -5,6 +5,7 @@ const config = {
   mode: 'development',
   entry: {
     index: '/public/assets/js/index.js',
+    indexeddb: '/public/assets/js/indexeddb.js',
     loadSW: '/public/assets/js/load-service-worker.js',
   },
   output: {
