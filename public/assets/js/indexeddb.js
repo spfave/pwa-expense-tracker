@@ -22,16 +22,13 @@ request.onerror = function (event) {
   console.log(`Error: ${event.target.errorCode}`);
 };
 
-request.onsuccess = function (event) {
-  console.log('success');
-  db = event.target.result;
+function saveRecord(record) {
+  console.log('Expense saved locally');
 
-  // Check if app is online before reading from db
-  if (navigator.onLine) {
-    console.log('Backend online! 🗄️');
-    checkDatabase();
-  }
-};
+  const transaction = db.transaction(['ExpenseStore'], 'readwrite');
+  const store = transaction.objectStore('ExpenseStore');
+  store.add(record);
+}
 
 // Event Listeners
 // window.addEventListener('online', checkDatabase);
