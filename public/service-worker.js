@@ -32,10 +32,9 @@ self.addEventListener('install', (event) => {
     caches
       .open(STATIC_CACHE)
       .then((cache) => cache.addAll(FILES_TO_CACHE))
+      .then(self.skipWaiting())
       .catch((error) => console.log(error))
   );
-
-  self.skipWaiting();
 });
 
 // Activate
@@ -57,9 +56,8 @@ self.addEventListener('activate', (event) => {
           })
         );
       })
+      .then(self.clients.claim())
   );
-
-  self.clients.claim();
 });
 
 // Fetch
