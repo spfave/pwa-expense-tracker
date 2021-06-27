@@ -33,45 +33,41 @@ function saveRecord(record) {
   console.log('Expense saved locally');
 }
 
-// function checkDatabase() {
-//   const storeName = 'ExpenseStore';
+function checkIndexedDB() {
+  // Create transaction on ExpenseStore DB, access ExpenseStore, get all records
+  const transaction = db.transaction(storeName, 'readwrite');
+  const store = transaction.objectStore(storeName);
+  const allExpenses = store.getAll();
 
-//   // Open transaction on ExpenseStore DB, access ExpenseStore, get all records
-//   const transaction = db.transaction(storeName, 'readwrite');
-//   const store = transaction.objectStore(storeName);
-//   const allExpenses = store.getAll();
+  // If request for all expenses successful, bulk add them to to expenseDB
+  allExpenses.onsuccess = async () => {
+    try {
+      // if no expenses in store: exit function
+      if (!allExpenses.result.length) return;
 
-//   // If request for all expenses successful, bulk add them to to expenseDB
-//   allExpenses.onsuccess = async () => {
-//     try {
-//       // if no expenses in store: exit function
-//       if (!allExpenses.result.length) return;
+      const response = await fetch('/api/transaction/bulk', {
+        method: 'POST',
+        body: JSON.stringify(allExpenses.result),
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
 
-//       const response = await fetch('/api/transaction/bulk', {
-//         method: 'POST',
-//         body: JSON.stringify(allExpenses.result),
-//         headers: {
-//           Accept: 'application/json, text/plain, */*',
-//           'Content-Type': 'application/json',
-//         },
-//       });
-//       const data = await response.json();
+      // if no  data returned: exit function
+      if (!data.length) return;
 
-//       // if no  data returned: exit function
-//       if (!data.length) return;
-
-//       // Open transaction on ExpenseStore DB, access ExpenseStore, clear store
-//       const transaction = db.transaction(storeName, 'readwrite');
-//       const store = transaction.objectStore(storeName);
-//       store.clear();
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// }
+      // Open transaction on ExpenseStore DB, access ExpenseStore, clear store
+      db.transaction(storeName, 'readwrite').objectStore(storeName).clear();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
 // Event Listeners
-// window.addEventListener('online', checkDatabase);
+window.addEventListener('online', checkIndexedDB);
 
 // Page Execution
 setupIndexedDB();
