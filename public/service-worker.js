@@ -62,6 +62,15 @@ self.addEventListener('activate', (event) => {
 
 // Fetch
 self.addEventListener('fetch', (event) => {
+  // non GET requests or requests to other origins are not cached
+  if (
+    event.request.method !== 'GET' ||
+    !event.request.url.startsWith(self.location.origin)
+  ) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
   // Submit api requests to server, fallback to cache if unavailable
   if (/\/api\//.test(event.request.url)) {
     event.respondWith(
