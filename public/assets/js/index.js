@@ -1,6 +1,6 @@
 import getTransactions from './api';
 import loadServiceWorker from './load-service-worker';
-import { populateTotal, populateTable, populateChart } from './displayMethods';
+import updateDataDisplay from './displayMethods';
 import { saveRecord, execIndexedDB } from './indexeddb';
 
 // Variables and Functions
@@ -29,9 +29,7 @@ function sendTransaction(isAdding) {
   transactions.unshift(transaction);
 
   // re-run logic to populate ui with new record
-  populateChart(transactions);
-  populateTable(transactions);
-  populateTotal(transactions);
+  updateDataDisplay(transactions);
 
   // also send to server
   fetch('/api/transaction', {
@@ -74,8 +72,11 @@ document.querySelector('#sub-btn').onclick = function () {
 };
 
 // Page Execution
-getTransactions(transactions)
-  .then((response) => (transactions = response))
+getTransactions()
+  .then((response) => {
+    transactions = response;
+    updateDataDisplay(transactions);
+  })
   .catch((error) => console.log(error));
 
 execIndexedDB();

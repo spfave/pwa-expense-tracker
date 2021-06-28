@@ -62,3 +62,9 @@ export function populateChart(transactions) {
     },
   });
 }
+
+export default function updateDataDisplay(transactions) {
+  populateTotal(transactions);
+  populateTable(transactions);
+  populateChart(transactions);
+}
