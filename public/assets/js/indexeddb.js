@@ -24,7 +24,7 @@ function setupIndexedDB() {
   };
 }
 
-function saveRecord(record) {
+export function saveRecord(record) {
   // Create transaction on ExpenseStore DB, access ExpenseStore, and add to store
   const transaction = db.transaction(storeName, 'readwrite');
   const store = transaction.objectStore(storeName);
@@ -66,8 +66,9 @@ function checkIndexedDB() {
   };
 }
 
-// Event Listeners
-window.addEventListener('online', checkIndexedDB);
+// Event Listeners and Page Execution
+export function execIndexedDB() {
+  window.addEventListener('online', checkIndexedDB);
 
-// Page Execution
-setupIndexedDB();
+  setupIndexedDB();
+}

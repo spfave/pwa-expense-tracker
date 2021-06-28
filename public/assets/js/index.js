@@ -1,6 +1,7 @@
 import getTransactions from './api';
-import { populateTotal, populateTable, populateChart } from './displayMethods';
 import loadServiceWorker from './load-service-worker';
+import { populateTotal, populateTable, populateChart } from './displayMethods';
+import { saveRecord, execIndexedDB } from './indexeddb';
 
 // Variables and Functions
 let transactions = [];
@@ -76,5 +77,7 @@ document.querySelector('#sub-btn').onclick = function () {
 getTransactions(transactions)
   .then((response) => (transactions = response))
   .catch((error) => console.log(error));
+
+execIndexedDB();
 
 loadServiceWorker();
