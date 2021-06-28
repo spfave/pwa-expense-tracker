@@ -3,9 +3,9 @@ import { populateTotal, populateTable, populateChart } from './displayMethods';
 export default async function getTransactions() {
   try {
     const response = await fetch('/api/transaction');
-    const transactions = await response.json();
+    const data = await response.json();
 
-    return transactions;
+    return data;
   } catch (error) {
     console.log(error);
   }
