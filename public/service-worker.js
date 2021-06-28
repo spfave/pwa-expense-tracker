@@ -4,7 +4,6 @@ const FILES_TO_CACHE = [
   '/',
   '/index.html',
   '/assets/css/styles.css',
-  '/assets/js/indexeddb.js',
 
   'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
   'https://cdn.jsdelivr.net/npm/chart.js@2.8.0',
@@ -12,9 +11,7 @@ const FILES_TO_CACHE = [
   // cache webpack generated manifest, js bundles, and assets
   '/dist/manifest.json',
 
-  // '/dist/assets/js/indexeddb.bundle.js',
   '/dist/assets/js/index.bundle.js',
-  '/dist/assets/js/loadSW.bundle.js',
 
   '/dist/assets/icons/icon_72x72.png',
   '/dist/assets/icons/icon_96x96.png',
