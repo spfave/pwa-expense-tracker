@@ -1,5 +1,5 @@
 // Functions
-async function loadServiceWorker() {
+export default async function loadServiceWorker() {
   // Check if browser supports service workers
   if (!('serviceWorker' in navigator)) {
     return alert(
@@ -17,6 +17,3 @@ async function loadServiceWorker() {
     console.log('Service Worker registration failed:', error);
   }
 }
-
-// Page Execution
-loadServiceWorker();

@@ -1,5 +1,6 @@
 import getTransactions from './api';
 import { populateTotal, populateTable, populateChart } from './displayMethods';
+import loadServiceWorker from './load-service-worker';
 
 // Variables and Functions
 let transactions = [];
@@ -11,7 +12,6 @@ function sendTransaction(isAdding) {
 
   // validate form
   if (nameEl.value === '' || amountEl.value === '') {
-    // errorEl.textContent = 'Missing Information';
     errorEl.hidden = false;
     setTimeout(() => (errorEl.hidden = true), 2000);
     return;
@@ -76,3 +76,5 @@ document.querySelector('#sub-btn').onclick = function () {
 getTransactions(transactions)
   .then((response) => (transactions = response))
   .catch((error) => console.log(error));
+
+loadServiceWorker();
