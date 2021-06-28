@@ -1,6 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-size: 120%;
   font-family: Arial;
+  margin: 0;
 }
 
 .my {
@@ -30,22 +35,30 @@ tr:nth-child(even) {
 }
 
 .error {
-  color: red;
+  width: 300px;
+  background-color: #eb8181;
+  color: white;
+  border-radius: 5px;
+  margin: auto;
+  padding: 5px;
 }
 
 .wrapper {
-  margin: 0 auto;
+  margin: 15px auto;
   max-width: 825px;
   text-align: center;
 }
 
 .total {
+  background-color: #035c0b;
+  color: white;
   font-size: 150%;
-  text-decoration: underline;
+  text-align: center;
+  margin: 0;
+  padding: 10px 0;
 }
 
 .form {
-  margin-top: 25px;
   width: 100%;
 }
 
@@ -54,5 +67,5 @@ tr:nth-child(even) {
   max-height: 300px;
   overflow: auto;
   width: 90%;
-  margin: 0 auto;
+  margin: 10px auto;
 }

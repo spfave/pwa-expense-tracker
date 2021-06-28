@@ -11,8 +11,9 @@ function sendTransaction(isAdding) {
 
   // validate form
   if (nameEl.value === '' || amountEl.value === '') {
-    errorEl.textContent = 'Missing Information';
-    setTimeout(() => (errorEl.textContent = ''), 2000);
+    // errorEl.textContent = 'Missing Information';
+    errorEl.hidden = false;
+    setTimeout(() => (errorEl.hidden = true), 2000);
     return;
   }
 
