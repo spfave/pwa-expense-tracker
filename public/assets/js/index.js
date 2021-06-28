@@ -6,6 +6,16 @@ import { saveRecord, execIndexedDB } from './indexeddb';
 // Variables and Functions
 let transactions = [];
 
+async function getTransactionData() {
+  try {
+    transactions = await getTransactions();
+  } catch (error) {
+    console.log(error);
+  }
+
+  updateDataDisplay(transactions);
+}
+
 function sendTransaction(isAdding) {
   let nameEl = document.querySelector('#t-name');
   let amountEl = document.querySelector('#t-amount');
@@ -72,12 +82,7 @@ document.querySelector('#sub-btn').onclick = function () {
 };
 
 // Page Execution
-getTransactions()
-  .then((response) => {
-    transactions = response;
-    updateDataDisplay(transactions);
-  })
-  .catch((error) => console.log(error));
+getTransactionData();
 
 execIndexedDB();
 
