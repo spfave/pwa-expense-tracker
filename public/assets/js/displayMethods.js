@@ -61,6 +61,16 @@ export function populateChart(transactions) {
         },
       ],
     },
+    options: {
+      plugins: {
+        title: { display: true, text: 'Running Balance' },
+        legend: { display: false },
+      },
+      scales: {
+        x: { title: { display: true, text: 'Date' } },
+        y: { title: { display: true, text: 'Balance' } },
+      },
+    },
   });
 }
 
