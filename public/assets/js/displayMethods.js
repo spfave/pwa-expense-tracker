@@ -55,7 +55,8 @@ export function populateChart(transactions) {
         {
           label: 'Total Over Time',
           fill: true,
-          backgroundColor: '#6666ff',
+          borderColor: '#1a7431',
+          backgroundColor: '#25a244',
           data,
         },
       ],
