@@ -41,7 +41,7 @@ function sendTransaction(isAdding) {
   // re-run logic to populate ui with new record
   updateDataDisplay(transactions);
 
-  // also send to server
+  // send to server
   fetch('/api/transaction', {
     method: 'POST',
     body: JSON.stringify(transaction),
