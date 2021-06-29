@@ -68,7 +68,7 @@ export function populateChart(transactions) {
       },
       scales: {
         x: { title: { display: true, text: 'Date' } },
-        y: { title: { display: true, text: 'Balance' } },
+        y: { title: { display: true, text: 'Balance' }, beginAtZero: true },
       },
     },
   });
