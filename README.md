@@ -27,6 +27,7 @@ The web application is hosted on Heroku for demonstration.
 ## **[Live Application](https://spf-expense-tracker.herokuapp.com/)**
 ## **Application Screenshots and Demo**
 ![app home page](./assets/img/app-home.png)
+![app (pwa) install from browser](./assets/img/app-install.gif)
 
 
 &nbsp;
