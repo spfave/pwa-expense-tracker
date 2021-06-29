@@ -10,7 +10,8 @@
     "lite-server": "lite-server",
     "server": "nodemon server.js --ignore public",
     "build": "webpack",
-    "webpack": "webpack --watch"
+    "webpack": "webpack --watch",
+    "heroku-postbuild": "webpack"
   },
   "repository": {
     "type": "git",
