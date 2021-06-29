@@ -1,5 +1,3 @@
-import { populateTotal, populateTable, populateChart } from './displayMethods';
-
 export default async function getTransactions() {
   try {
     const response = await fetch('/api/transaction');
