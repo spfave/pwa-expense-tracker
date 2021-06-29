@@ -6,7 +6,7 @@ const FILES_TO_CACHE = [
   '/assets/css/styles.css',
 
   'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
-  'https://cdn.jsdelivr.net/npm/chart.js@2.8.0',
+  'https://cdn.jsdelivr.net/npm/chart.js@3.2.0/dist/chart.min.js',
 
   // cache webpack generated manifest, js bundles, and assets
   '/dist/manifest.json',
