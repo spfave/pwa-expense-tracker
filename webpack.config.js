@@ -36,7 +36,7 @@ const config = {
       short_name: 'Expenses',
       description:
         'PWA application for tracking expense costs and maintaining a running budget balance',
-      theme_color: '#ffffff',
+      theme_color: '#1a7431',
       background_color: '#ffffff',
       start_url: '/',
       display: 'standalone',

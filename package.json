@@ -11,9 +11,7 @@
     "lite-server": "lite-server",
     "server": "nodemon server.js --ignore public",
     "build": "webpack",
-    "webpack": "webpack --watch",
-    "heroku-prebuild": "npm install --dev",
-    "heroku-cleanup": "npm uninstall --dev"
+    "webpack": "webpack --watch"
   },
   "repository": {
     "type": "git",
