@@ -33,7 +33,7 @@ The web application is hosted on Heroku for demonstration.
 &nbsp;
 ## **Technologies and Services**
 Development Technologies
-- Database/Models: MongoDD, Mongoose (ODM)
+- Database/Models: MongoDB, Mongoose (ODM)
 - Client/Views: HTML, CSS, JavaScript
 - Server/Controllers: Node.js, Express.js
 
